@@ -1,0 +1,36 @@
+appId: com.test-adding-electron-to-create-nuxt-app.app
+copyright: shogo-yamato
+productName: test-adding-electron-to-create-nuxt-app
+
+asar: true
+
+directories:
+  output: build/
+
+files:
+  - package.json
+  - dist/main/
+  - dist/renderer/
+  - dist/nuxt-build/
+
+dmg:
+  contents:
+    - type: link
+      path: /Applications
+      x: 410
+      y: 150
+    - type: file
+      x: 130
+      y: 150
+
+mac:
+  target: dmg
+  category: public.app-category.developer-tools
+
+win:
+  target: nsis
+
+linux:
+  target:
+    - deb
+    - AppImage
