@@ -83,7 +83,7 @@
           >. Have fun!
         </p>
       </div>
-      <div class="flex justify-center pt-4 space-x-2">
+      <div class="flex justify-center items-center pt-4 space-x-2">
         <a href="https://github.com/nuxt/nuxt.js" target="_blank"
           ><svg
             class="w-6 h-6 text-gray-600 hover:text-gray-800"
@@ -118,6 +118,7 @@
               fill="currentColor"
             /></svg
         ></a>
+        <nuxt-link to="/">RETURN TO INDEX</nuxt-link>
       </div>
     </div>
   </div>

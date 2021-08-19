@@ -3290,6 +3290,21 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
+"chokidar@>=3.0.0 <4.0.0", chokidar@^3.4.1, chokidar@^3.4.2, chokidar@^3.5.1, chokidar@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"
+  integrity sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==
+  dependencies:
+    anymatch "~3.1.2"
+    braces "~3.0.2"
+    glob-parent "~5.1.2"
+    is-binary-path "~2.1.0"
+    is-glob "~4.0.1"
+    normalize-path "~3.0.0"
+    readdirp "~3.6.0"
+  optionalDependencies:
+    fsevents "~2.3.2"
+
 chokidar@^2.1.8:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.8.tgz#804b3a7b6a99358c3c5c61e71d8728f041cff917"
@@ -3308,21 +3323,6 @@ chokidar@^2.1.8:
     upath "^1.1.1"
   optionalDependencies:
     fsevents "^1.2.7"
-
-chokidar@^3.4.1, chokidar@^3.4.2, chokidar@^3.5.1, chokidar@^3.5.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"
-  integrity sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==
-  dependencies:
-    anymatch "~3.1.2"
-    braces "~3.0.2"
-    glob-parent "~5.1.2"
-    is-binary-path "~2.1.0"
-    is-glob "~4.0.1"
-    normalize-path "~3.0.0"
-    readdirp "~3.6.0"
-  optionalDependencies:
-    fsevents "~2.3.2"
 
 chownr@^1.1.1:
   version "1.1.4"
@@ -7042,7 +7042,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.12, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
+lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -8906,7 +8906,7 @@ postcss-replace-overflow-wrap@^3.0.0:
   dependencies:
     postcss "^7.0.2"
 
-postcss-resolve-nested-selector@^0.1.1:
+postcss-resolve-nested-selector@0.1.1, postcss-resolve-nested-selector@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/postcss-resolve-nested-selector/-/postcss-resolve-nested-selector-0.1.1.tgz#29ccbc7c37dedfac304e9fff0bf1596b3f6a0e4e"
   integrity sha1-Kcy8fDfe36wwTp//C/FZaz9qDk4=
@@ -8949,6 +8949,15 @@ postcss-selector-not@^4.0.0:
     balanced-match "^1.0.0"
     postcss "^7.0.2"
 
+postcss-selector-parser@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-2.2.1.tgz#fdbf696103b12b0a64060e5610507f410491f7c8"
+  integrity sha1-/b9pYQOxKwpkBg5WEFB/QQSR98g=
+  dependencies:
+    flatten "^1.0.2"
+    indexes-of "^1.0.1"
+    uniq "^1.0.1"
+
 postcss-selector-parser@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-3.1.2.tgz#b310f5c4c0fdaf76f94902bbaa30db6aa84f5270"
@@ -8974,6 +8983,14 @@ postcss-selector-parser@^6.0.0, postcss-selector-parser@^6.0.2, postcss-selector
   dependencies:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
+
+postcss-sorting@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-sorting/-/postcss-sorting-5.0.1.tgz#10d5d0059eea8334dacc820c0121864035bc3f11"
+  integrity sha512-Y9fUFkIhfrm6i0Ta3n+89j56EFqaNRdUKqXyRp6kvTcSXnmgEjaVowCXH+JBe9+YKWqd4nc28r2sgwnzJalccA==
+  dependencies:
+    lodash "^4.17.14"
+    postcss "^7.0.17"
 
 postcss-svgo@^4.0.3:
   version "4.0.3"
@@ -9028,7 +9045,7 @@ postcss-values-parser@^2.0.0, postcss-values-parser@^2.0.1:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss@7.x.x, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.27, postcss@^7.0.32, postcss@^7.0.35, postcss@^7.0.36, postcss@^7.0.5, postcss@^7.0.6:
+postcss@7.x.x, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.27, postcss@^7.0.31, postcss@^7.0.32, postcss@^7.0.35, postcss@^7.0.36, postcss@^7.0.5, postcss@^7.0.6:
   version "7.0.36"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.36.tgz#056f8cffa939662a8f5905950c07d5285644dfcb"
   integrity sha512-BebJSIUMwJHRH0HAQoxN4u1CN86glsrwsW0q7T+/m44eXOUAxSNdHRkNZPYz5vVUbg17hFgOQDE7fZk7li3pZw==
@@ -9729,6 +9746,24 @@ sass-loader@10.1.1:
     schema-utils "^3.0.0"
     semver "^7.3.2"
 
+sass-loader@^10:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-10.2.0.tgz#3d64c1590f911013b3fa48a0b22a83d5e1494716"
+  integrity sha512-kUceLzC1gIHz0zNJPpqRsJyisWatGYNFRmv2CKZK2/ngMJgLqxTbXwe/hJ85luyvZkgqU3VlJ33UVF2T/0g6mw==
+  dependencies:
+    klona "^2.0.4"
+    loader-utils "^2.0.0"
+    neo-async "^2.6.2"
+    schema-utils "^3.0.0"
+    semver "^7.3.2"
+
+sass@^1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.38.0.tgz#2f3e60a1efdcdc910586fa79dc89d3399a145b4f"
+  integrity sha512-WBccZeMigAGKoI+NgD7Adh0ab1HUq+6BmyBUEaGxtErbUtWUevEbdgo5EZiJQofLUGcKtlNaO2IdN73AHEua5g==
+  dependencies:
+    chokidar ">=3.0.0 <4.0.0"
+
 sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -10426,6 +10461,20 @@ stylelint-config-prettier@^8.0.2:
   resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-8.0.2.tgz#da9de33da4c56893cbe7e26df239a7374045e14e"
   integrity sha512-TN1l93iVTXpF9NJstlvP7nOu9zY2k+mN0NSFQ/VEGz15ZIP9ohdDZTtCWHs5LjctAhSAzaILULGbgiM0ItId3A==
 
+stylelint-config-recess-order@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-recess-order/-/stylelint-config-recess-order-2.5.0.tgz#a64f2d95eb27c0737054b13efc51553fc9ca30c0"
+  integrity sha512-FqhPRGQlHnTS/ZPegq5ORelHsk9X5S+l0uQu1N97e+SSLD+6XYDewdkXy6e2yx8fpZLvwpP3TnPoNTHGw52DzA==
+  dependencies:
+    stylelint-order "4.1.x"
+
+stylelint-config-recommended-scss@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-recommended-scss/-/stylelint-config-recommended-scss-4.3.0.tgz#717dc253b4cab246da654cee208e499c5c797ae4"
+  integrity sha512-/noGjXlO8pJTr/Z3qGMoaRFK8n1BFfOqmAbX1RjTIcl4Yalr+LUb1zb9iQ7pRx1GsEBXOAm4g2z5/jou/pfMPg==
+  dependencies:
+    stylelint-config-recommended "^5.0.0"
+
 stylelint-config-recommended@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-5.0.0.tgz#fb5653f495a60b4938f2ad3e77712d9e1039ae78"
@@ -10437,6 +10486,34 @@ stylelint-config-standard@^22.0.0:
   integrity sha512-uQVNi87SHjqTm8+4NIP5NMAyY/arXrBgimaaT7skvRfE9u3JKXRK9KBkbr4pVmeciuCcs64kAdjlxfq6Rur7Hw==
   dependencies:
     stylelint-config-recommended "^5.0.0"
+
+stylelint-order@4.1.x:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/stylelint-order/-/stylelint-order-4.1.0.tgz#692d05b7d0c235ac66fcf5ea1d9e5f08a76747f6"
+  integrity sha512-sVTikaDvMqg2aJjh4r48jsdfmqLT+nqB1MOsaBnvM3OwLx4S+WXcsxsgk5w18h/OZoxZCxuyXMh61iBHcj9Qiw==
+  dependencies:
+    lodash "^4.17.15"
+    postcss "^7.0.31"
+    postcss-sorting "^5.0.1"
+
+stylelint-rscss@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/stylelint-rscss/-/stylelint-rscss-0.4.0.tgz#ea77c478e1c703dbda878c00f53bbc002b2d07b7"
+  integrity sha1-6nfEeOHHA9vah4wA9Tu8ACstB7c=
+  dependencies:
+    postcss-resolve-nested-selector "0.1.1"
+    postcss-selector-parser "2.2.1"
+
+stylelint-scss@^3.20.1:
+  version "3.20.1"
+  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-3.20.1.tgz#88f175d9cfe1c81a72858bd0d3550cf61530e212"
+  integrity sha512-OTd55O1TTAC5nGKkVmUDLpz53LlK39R3MImv1CfuvsK7/qugktqiZAeQLuuC4UBhzxCnsc7fp9u/gfRZwFAIkA==
+  dependencies:
+    lodash "^4.17.15"
+    postcss-media-query-parser "^0.2.3"
+    postcss-resolve-nested-selector "^0.1.1"
+    postcss-selector-parser "^6.0.2"
+    postcss-value-parser "^4.1.0"
 
 stylelint-webpack-plugin@^2.0.0:
   version "2.2.2"
