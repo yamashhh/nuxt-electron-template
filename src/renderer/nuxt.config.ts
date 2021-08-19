@@ -62,19 +62,20 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extend(config: webpack.Configuration) {
-      if (!isDev) {
-        // NOTE:
-        // 本番のときは相対パスにする
-        // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build#extend
-        // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build#publicpath
-        // @ts-ignore
-        config.output.publicPath = '_nuxt/'
-      }
+      // NOTE:
+      // 本番のときは相対パスにする
+      // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build#extend
+      if (!isDev && config.output) config.output.publicPath = './_nuxt/'
+
       config.node = {
         __dirname: !isProduction,
         __filename: !isProduction,
       }
     },
+    // NOTE:
+    // 本番のときは相対パスにする
+    // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build#publicpath
+    publicPath: !isDev ? './_nuxt/' : '/_nuxt/',
   },
 
   // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-generate
