@@ -10,19 +10,3 @@ import Vue from 'vue'
 
 export default Vue.extend({})
 </script>
-
-<style lang="scss" scoped>
-@import 'assets/scss/app';
-
-.test-component {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  > .title {
-    font-size: 5rem;
-    line-height: 1.5;
-  }
-}
-</style>
