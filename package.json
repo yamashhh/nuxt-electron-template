@@ -32,7 +32,7 @@
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
-    "*.{css,vue}": "stylelint"
+    "*.{scss,vue}": "stylelint"
   },
   "dependencies": {
     "core-js": "^3.15.1",
