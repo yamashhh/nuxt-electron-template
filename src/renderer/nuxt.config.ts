@@ -1,3 +1,4 @@
+import { NuxtConfig } from '@nuxt/types'
 import * as webpack from 'webpack'
 
 // courtesy of https://github.com/282Haniwa/nuxt-electron-example
@@ -17,7 +18,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'test-adding-electron-to-create-nuxt-app',
+    title: 'nuxt-electron-template',
     htmlAttrs: {
       lang: 'en',
     },
@@ -85,4 +86,4 @@ export default {
 
   // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-telemetry
   telemetry: false,
-}
+} as NuxtConfig

@@ -1,83 +1,82 @@
 // courtesy of https://github.com/282Haniwa/nuxt-electron-example/blob/master/src/main/index.ts
 
 import { pathToFileURL } from 'url'
-import { app, BrowserWindow } from 'electron'
+import { get, createServer } from 'http'
+import path from 'path'
+import { app, BrowserWindow, crashReporter } from 'electron'
+// @ts-ignore
+import { Nuxt, Builder } from 'nuxt'
+import { AddressInfo } from 'node:net'
+import { IncomingMessage } from 'node:http'
 import nuxtConfig from '../renderer/nuxt.config'
-const http = require('http')
-const path = require('path')
-const { Nuxt, Builder } = require('nuxt')
 
-// @ts-ignore
 nuxtConfig.rootDir = path.resolve('src/renderer')
-// @ts-ignore
-const isDev = nuxtConfig.dev
 
+const isDev = nuxtConfig.dev
 const nuxt = new Nuxt(nuxtConfig)
 const builder = new Builder(nuxt)
-const server = http.createServer(nuxt.render)
+const server = createServer(nuxt.render)
 
 let _NUXT_URL_ = ''
 
 if (isDev) {
   /* eslint-disable no-console */
-  builder.build().catch((err: any) => {
-    console.error(err)
+  builder.build().catch((error: any) => {
+    console.error(error)
     process.exit(1)
   })
   server.listen()
-  _NUXT_URL_ = `http://localhost:${server.address().port}`
+  const { port } = server.address() as AddressInfo
+  _NUXT_URL_ = `http://localhost:${port}`
   console.log(`Nuxt working on ${_NUXT_URL_}`)
   /* eslint-enable */
 } else {
   _NUXT_URL_ = pathToFileURL(
     path.resolve(__dirname, '../../dist/nuxt-build/index.html')
-  ).toString()
+  ).href
 }
 
-let win: BrowserWindow | null = null
+function pollServer(): void {
+  get(_NUXT_URL_, (res: IncomingMessage) => {
+    if (res.statusCode !== 200) {
+      // eslint-disable-next-line no-console
+      console.log('restart pollServer')
+      setTimeout(pollServer, 300)
+    }
+  }).on('error', pollServer)
+}
 
-function createWindow() {
-  win = new BrowserWindow({
+async function createWindow(): Promise<void> {
+  const window = new BrowserWindow({
     width: 1400,
     height: 1000,
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: false,
-      preload: path.resolve(path.join(__dirname, 'preload.js')),
-      webSecurity: false,
+      preload: path.join(__dirname, 'preload.js'),
+      webSecurity: !isDev,
     },
   })
-  win.on('closed', () => (win = null))
   if (isDev) {
-    /* eslint-disable no-console */
     const {
       default: installExtension,
       VUEJS_DEVTOOLS,
     } = require('electron-devtools-installer')
-    installExtension(VUEJS_DEVTOOLS.id)
-      .then((name: any) => {
-        console.log(`Added Extension: ${name}`)
-        if (win) win.webContents.openDevTools()
-      })
-      .catch((err: any) => console.log('An error occurred: ', err))
-    const pollServer = () => {
-      http
-        .get(_NUXT_URL_, (res: any) => {
-          if (res.statusCode === 200) {
-            if (win) win.loadURL(_NUXT_URL_)
-          } else {
-            console.log('restart poolServer')
-            setTimeout(pollServer, 300)
-          }
-        })
-        .on('error', pollServer)
+    /* eslint-disable no-console */
+    try {
+      const name = await installExtension(VUEJS_DEVTOOLS.id)
+      console.log(`Added Extension: ${name}`)
+    } catch (error: any) {
+      console.error(`An error occurred: ${error}`)
     }
-    pollServer()
     /* eslint-enable */
-  } else {
-    return win.loadURL(_NUXT_URL_)
+    pollServer()
   }
+  await window.loadURL(_NUXT_URL_)
+  if (isDev) window.webContents.openDevTools()
 }
+
+crashReporter.start({
+  uploadToServer: false,
+})
 
 app.whenReady().then(() => {
   createWindow()
