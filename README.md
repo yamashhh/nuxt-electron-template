@@ -5,8 +5,8 @@
 | Module           | Version                |
 | ---------------- | ---------------------- |
 | Node.js          | ^14.17.1 (Node.js LTS) |
-| Nuxt.js          | ^2.15.7                |
-| Electron         | ^13.2.1                |
+| Nuxt.js          | ^2.15.8                |
+| Electron         | ^14.0.0                |
 | electron-builder | ^22.11.7               |
 
 ## Build Setup
