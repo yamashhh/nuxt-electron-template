@@ -5,8 +5,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from '@nuxtjs/composition-api'
 import TestComponent from '@/components/TestComponent.vue'
 
-export default Vue.extend({ components: { TestComponent } })
+export default defineComponent({
+  components: { TestComponent },
+})
 </script>
