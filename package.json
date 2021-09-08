@@ -50,7 +50,7 @@
     "@nuxtjs/stylelint-module": "^4.0.0",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
-    "electron": "^13.2.1",
+    "electron": "^14.0.0",
     "electron-builder": "^22.11.7",
     "electron-devtools-installer": "^3.2.0",
     "eslint": "^7.29.0",
