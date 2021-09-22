@@ -2,12 +2,12 @@
 
 ## Environment
 
-| Module           | Version                |
-| ---------------- | ---------------------- |
-| Node.js          | ^14.17.1 (Node.js LTS) |
-| Nuxt.js          | ^2.15.8                |
-| Electron         | ^14.0.0                |
-| electron-builder | ^22.11.7               |
+| Module           | Version                   |
+| ---------------- | ------------------------- |
+| Node.js          | ^16.9.1 (Node.js Current) |
+| Nuxt.js          | ^2.15.8                   |
+| Electron         | ^15.0.0                   |
+| electron-builder | ^22.11.7                  |
 
 ## Build Setup
 
