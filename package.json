@@ -35,7 +35,7 @@
     "*.{scss,vue}": "stylelint"
   },
   "dependencies": {
-    "core-js": "^3.18.0",
+    "core-js": "^3.18.1",
     "nuxt": "^2.15.8"
   },
   "devDependencies": {
