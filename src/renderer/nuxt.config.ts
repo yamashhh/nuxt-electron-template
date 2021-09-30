@@ -3,7 +3,6 @@ import * as webpack from 'webpack'
 
 // courtesy of https://github.com/282Haniwa/nuxt-electron-example
 
-const isProduction = process.env.NODE_ENV === 'production'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default {
@@ -71,8 +70,8 @@ export default {
       if (!isDev && config.output) config.output.publicPath = './_nuxt/'
 
       config.node = {
-        __dirname: !isProduction,
-        __filename: !isProduction,
+        __dirname: isDev,
+        __filename: isDev,
       }
     },
     // NOTE:
