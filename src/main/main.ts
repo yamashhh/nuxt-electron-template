@@ -3,33 +3,49 @@
 import { pathToFileURL } from 'url'
 import { get, createServer } from 'http'
 import path from 'path'
+import { AddressInfo } from 'node:net'
+import { IncomingMessage } from 'node:http'
 import { app, BrowserWindow, crashReporter } from 'electron'
 // @ts-ignore
 import { Nuxt, Builder } from 'nuxt'
-import { AddressInfo } from 'node:net'
-import { IncomingMessage } from 'node:http'
 import nuxtConfig from '../renderer/nuxt.config'
 
 nuxtConfig.rootDir = path.resolve('src/renderer')
 
-const isDev = nuxtConfig.dev
-const nuxt = new Nuxt(nuxtConfig)
-const builder = new Builder(nuxt)
-const server = createServer(nuxt.render)
+const isDev: boolean = nuxtConfig.dev as boolean
+let _NUXT_URL_: string = ''
 
-let _NUXT_URL_ = ''
-
-if (isDev) {
-  /* eslint-disable no-console */
-  builder.build().catch((error: any) => {
+async function buildServer(): Promise<void> {
+  const nuxt = new Nuxt(nuxtConfig)
+  // https://blog.mamansoft.net/2019/12/29/nuxt-typescript-electron-sqlite-project2/
+  // https://typescript.nuxtjs.org/guide/setup/#configuration
+  await nuxt.ready()
+  const builder = new Builder(nuxt)
+  const server = createServer(nuxt.render)
+  try {
+    builder.build()
+  } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error)
     process.exit(1)
-  })
+  }
   server.listen()
   const { port } = server.address() as AddressInfo
   _NUXT_URL_ = `http://localhost:${port}`
+  // eslint-disable-next-line no-console
   console.log(`Nuxt working on ${_NUXT_URL_}`)
-  /* eslint-enable */
+
+  // NOTE:
+  // アプリ終了時にDevサーバーを終了
+  // close()関数については以下参照
+  // https://github.com/nuxt/nuxt.js/blob/0145578493a123ee0ff0e9adc4921582d456d366/packages/builder/src/builder.js#L775
+  app.on('will-quit', () => {
+    builder.close()
+  })
+}
+
+if (isDev) {
+  buildServer()
 } else {
   _NUXT_URL_ = pathToFileURL(
     path.resolve(__dirname, '../../dist/nuxt-build/index.html')
@@ -60,14 +76,14 @@ async function createWindow(): Promise<void> {
       default: installExtension,
       VUEJS_DEVTOOLS,
     } = require('electron-devtools-installer')
-    /* eslint-disable no-console */
     try {
       const name = await installExtension(VUEJS_DEVTOOLS.id)
+      // eslint-disable-next-line no-console
       console.log(`Added Extension: ${name}`)
     } catch (error: any) {
+      // eslint-disable-next-line no-console
       console.error(`An error occurred: ${error}`)
     }
-    /* eslint-enable */
     pollServer()
   }
   await window.loadURL(_NUXT_URL_)
@@ -88,13 +104,4 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
-})
-
-// NOTE:
-// Dev環境のとき、
-// アプリ終了時にDevサーバーを終了
-// close()関数については以下参照
-// https://github.com/nuxt/nuxt.js/blob/0145578493a123ee0ff0e9adc4921582d456d366/packages/builder/src/builder.js#L775
-app.on('will-quit', () => {
-  if (isDev) builder.close()
 })
