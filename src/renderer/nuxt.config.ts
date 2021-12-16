@@ -1,11 +1,21 @@
+// courtesy of https://github.com/282Haniwa/nuxt-electron-example
+
 import { NuxtConfig } from '@nuxt/types'
 import * as webpack from 'webpack'
+import { config as dotenvConfig } from 'dotenv'
 
-// courtesy of https://github.com/282Haniwa/nuxt-electron-example
+// https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+// https://github.com/motdotla/dotenv#config
+// NOTE:
+// import/exportで記述したファイルは
+// .envファイルに定義した環境変数を参照するとき
+// 以下を実行しないといけない
+dotenvConfig()
 
 const isDev = process.env.NODE_ENV === 'development'
 
-export default {
+// https://typescript.nuxtjs.org/cookbook/configuration/
+const nuxtConfig: NuxtConfig = {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -87,4 +97,6 @@ export default {
 
   // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-telemetry
   telemetry: false,
-} as NuxtConfig
+}
+
+export default nuxtConfig

@@ -29,7 +29,8 @@ async function buildServer(): Promise<void> {
     console.error(error)
     process.exit(1)
   }
-  server.listen()
+  // https://nuxtjs.org/docs/internals-glossary/nuxt-render
+  server.listen(process.env.PORT || 3000)
   const { port } = server.address() as AddressInfo
   _NUXT_URL_ = `http://localhost:${port}`
   // eslint-disable-next-line no-console
@@ -63,7 +64,7 @@ function pollServer(): void {
 }
 
 async function createWindow(): Promise<void> {
-  const window = new BrowserWindow({
+  const window: BrowserWindow = new BrowserWindow({
     width: 1400,
     height: 1000,
     webPreferences: {
@@ -94,14 +95,14 @@ crashReporter.start({
   uploadToServer: false,
 })
 
-app.whenReady().then(() => {
+app.whenReady().then((): void => {
   createWindow()
 
-  app.on('activate', () => {
+  app.on('activate', (): void => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 })
 
-app.on('window-all-closed', () => {
+app.on('window-all-closed', (): void => {
   if (process.platform !== 'darwin') app.quit()
 })
